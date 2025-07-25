@@ -1,0 +1,36 @@
+{
+    "name": "Playbox",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.Purchasing",
+        "UnityEngine.Purchasing.Apple",
+        "AppsFlyer",
+        "MaxSdk.Scripts",
+        "com.devtodev.sdk.analytics",
+        "Purchasing.Common",
+        "Unity.TextMeshPro",
+        "UnityEngine.Purchasing.Stores",
+        "Unity.Services.Core",
+        "Unity.Services.Core.Environments",
+        "Unity.Advertisement.IosSupport"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll",
+        "Facebook.Unity.dll",
+        "Firebase.Crashlytics.dll",
+        "Firebase.Analytics.dll",
+        "Firebase.App.dll",
+        "Firebase.Platform.dll",
+        "Firebase.TaskExtension.dll",
+        "DevToDev.Analytics.dll",
+        "DevToDev.Core.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
