@@ -10,26 +10,26 @@ namespace Playbox.Consent
 {
     public class IOSConsent
     {
-        public static void ShowATTUI(MonoBehaviour mono, Action onComplete)
+        public static void ShowATTUI(MonoBehaviour mono, Action<bool> onComplete)
         {
 
             mono.StartCoroutine(IosATTStatus(360, status =>
             {
                 if (status == ATTrackingStatusBinding.AuthorizationTrackingStatus.AUTHORIZED)
                 {
-                    onComplete?.Invoke();
+                    onComplete?.Invoke(true);
                     "ATT: AUTHORIZED".PlayboxSplashLogUGUI();
                 }
 
                 if (status == ATTrackingStatusBinding.AuthorizationTrackingStatus.DENIED)
                 {
-                    onComplete?.Invoke();
+                    onComplete?.Invoke(false);
                     "ATT: DENIED".PlayboxSplashLogUGUI();
                 }
                 
                 if (status == ATTrackingStatusBinding.AuthorizationTrackingStatus.RESTRICTED)
                 {
-                    onComplete?.Invoke();
+                    onComplete?.Invoke(false);
                     "ATT: RESTRICTED".PlayboxSplashLogUGUI();
                 }
                 

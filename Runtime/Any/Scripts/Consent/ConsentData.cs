@@ -46,7 +46,6 @@ namespace Playbox.Consent
             IsChildUser = false;
             HasUserConsent = true;
             HasDoNotSell = true;
-            ATE = true;
 
             "Consent Allow".PlayboxInfo();
             //consentCallback?.Invoke(true);
@@ -63,7 +62,6 @@ namespace Playbox.Consent
             IsChildUser = false;
             HasUserConsent = true;
             HasDoNotSell = true;
-            ATE = false;
             
             "Consent Deny".PlayboxInfo();
             //consentCallback?.Invoke(false);
@@ -100,11 +98,12 @@ namespace Playbox.Consent
 
                 bool isATTComplete = false;
                 
-                IOSConsent.ShowATTUI(mono, () =>
+                IOSConsent.ShowATTUI(mono, (result) =>
                 {
                     isATTComplete = true;
                     callback?.Invoke();
                     
+                    ATE = result;
                 });
                 
                 if (isATTComplete)
