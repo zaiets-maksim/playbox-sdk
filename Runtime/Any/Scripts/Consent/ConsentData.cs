@@ -7,6 +7,7 @@ using Utils.Timer;
 
 #if UNITY_IOS
 using Unity.Advertisement.IosSupport;
+using UnityEngine.iOS;
 #endif
 
 namespace Playbox.Consent
@@ -103,7 +104,7 @@ namespace Playbox.Consent
                     isATTComplete = true;
                     callback?.Invoke();
                     
-                    ATE = result;
+                    ATE = Device.advertisingTrackingEnabled && result;
                 });
                 
                 if (isATTComplete)
