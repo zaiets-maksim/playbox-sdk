@@ -18,6 +18,7 @@ namespace Playbox.Consent
         public static bool ConsentForData = false;
         public static bool ConsentForAdsPersonalized = false;
         public static bool ConsentForAdStogare = false;
+        public static bool ATE = false;
         public static string AdvertisingId = "";
 
         public static bool IsChildUser = false;
@@ -45,6 +46,7 @@ namespace Playbox.Consent
             IsChildUser = false;
             HasUserConsent = true;
             HasDoNotSell = true;
+            ATE = true;
 
             "Consent Allow".PlayboxInfo();
             //consentCallback?.Invoke(true);
@@ -61,6 +63,7 @@ namespace Playbox.Consent
             IsChildUser = false;
             HasUserConsent = true;
             HasDoNotSell = true;
+            ATE = false;
             
             "Consent Deny".PlayboxInfo();
             //consentCallback?.Invoke(false);
