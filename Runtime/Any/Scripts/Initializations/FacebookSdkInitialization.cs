@@ -30,12 +30,13 @@ namespace Playbox
             {
                 FB.ActivateApp();
                 InitParameters();
+                
+                ApproveInitialization();
             }
             else
             {
                 FB_Init(() => { OnInitCallback();});
             }
-            
         }
 
         private void OnInitCallback()
@@ -43,16 +44,14 @@ namespace Playbox
             if (FB.IsInitialized)
             {
                 FB.ActivateApp();
+                
                 InitParameters();
                 
                 ApproveInitialization();
             }
             else
             {
-                Analytics.TrackEvent("Facebook", new List<KeyValuePair<string, string>>{
-                    new("type","Error of Initializing"),
-                    new("app identifier",Application.identifier)
-                });
+                Analytics.Events.FirebaseEvent("Facebook", $"Firebase initialization failure\n App Id: {Application.identifier}");
             }
         }
         
@@ -73,6 +72,8 @@ namespace Playbox
         
         private void OnApplicationPause(bool pauseStatus)
         {
+            Debug.Log($"Active {pauseStatus}");
+            
             if (!pauseStatus) {
               
                 if (FB.IsInitialized) {
@@ -81,6 +82,7 @@ namespace Playbox
                     
                     FB_Init( () => {
                         FB.ActivateApp();
+                        InitParameters();
                     });
                 }
             }
