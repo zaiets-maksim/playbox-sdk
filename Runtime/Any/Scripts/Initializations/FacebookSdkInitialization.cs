@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Facebook.Unity;
 using Playbox.Consent;
 using Playbox.SdkConfigurations;
@@ -8,6 +9,7 @@ namespace Playbox
 {
     public class FacebookSdkInitialization : PlayboxBehaviour
     {
+
         private void InitParameters()
         {
             FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
@@ -31,17 +33,7 @@ namespace Playbox
             }
             else
             {
-                FB.Init(FacebookSdkConfiguration.AppID,
-                    FacebookSdkConfiguration.ClientToken,
-                    true,
-                    true,
-                    true,
-                    false,
-                    true,
-                    null,
-                    "en_US",
-                    null,
-                    OnInitCallback);
+                FB_Init(() => { OnInitCallback();});
             }
             
         }
@@ -61,6 +53,36 @@ namespace Playbox
                     new("type","Error of Initializing"),
                     new("app identifier",Application.identifier)
                 });
+            }
+        }
+        
+        private static void FB_Init(Action callback)
+        {
+            FB.Init(FacebookSdkConfiguration.AppID,
+                FacebookSdkConfiguration.ClientToken,
+                true,
+                true,
+                true,
+                false,
+                true,
+                null,
+                "en_US",
+                null,
+                ()=> { callback?.Invoke(); });
+        }
+        
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (!pauseStatus) {
+              
+                if (FB.IsInitialized) {
+                    FB.ActivateApp();
+                } else {
+                    
+                    FB_Init( () => {
+                        FB.ActivateApp();
+                    });
+                }
             }
         }
 
