@@ -8,6 +8,13 @@ namespace Playbox
 {
     public class FacebookSdkInitialization : PlayboxBehaviour
     {
+        private void InitParameters()
+        {
+            FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
+            FB.Mobile.SetAutoLogAppEventsEnabled(true);
+            FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
+        }
+
         public override void Initialization()
         {
             base.Initialization();
@@ -20,9 +27,7 @@ namespace Playbox
             if (FB.IsInitialized)
             {
                 FB.ActivateApp();
-                FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
-                FB.Mobile.SetAutoLogAppEventsEnabled(true);
-                FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
+                InitParameters();
             }
             else
             {
@@ -46,6 +51,8 @@ namespace Playbox
             if (FB.IsInitialized)
             {
                 FB.ActivateApp();
+                InitParameters();
+                
                 ApproveInitialization();
             }
             else
