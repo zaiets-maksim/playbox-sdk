@@ -1,85 +1,50 @@
-# 📦 PlayboxSDK Integration Guide
+# PlayboxSDK Integration Guide
+
+## 1. Add the PlayboxInstaller Package
+
+1. Open Unity.
+2. Go to **Window → Package Manager**.
+3. Click **Add package from Git URL...**.
+4. Paste the following URL:
+   ```
+   https://github.com/playbox-technologies/playbox-installer.git
+   ```
+5. Click **Add** and wait for the installation to complete.
 
 ---
 
-## 🚀 Install
+## 2. Install Dependencies via PlayboxInstaller
 
-### 🔹 1. Prerequisites
-
-#### 📦 AppLovin
-- **Download the AppLovin package**  
-  [AppLovin Integration Guide](https://developers.applovin.com/en/max/unity/overview/integration/)
-- **Import AppLovin into Unity**
-- AppLovin will automatically install the External Dependency Manager.
-
----
-
-#### 📦 AppsFlyer
-- **Download AppsFlyer and import it into the Unity project**  
-  [AppsFlyerSDK Download Link](https://github.com/AppsFlyerSDK/appsflyer-unity-plugin/releases)
-- **Or add via Unity Package Manager**:
-  ```
-  https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#upm
-  ```
-  [AppsFlyer UPM link](https://github.com/AppsFlyerSDK/appsflyer-unity-plugin.git#upm)
+1. In Unity, open the **PlayboxInstaller context menu**.
+2. Run all setup stages sequentially (Stage 1 → Stage 2).
+3. After **Stage 2** is complete, a `DownloadFiles` folder will appear in the project root.
+4. From this folder, extract and install the required SDKs:
+  - `Firebase.Analytics`
+  - `Firebase.Crashlytics`
+  - `FacebookSdk`
 
 ---
 
-#### 📦 DevToDev
-- **Add DevToDev packages via Unity Package Manager**:
-    - [DevToDev Analytics](https://github.com/devtodev-analytics/package_Analytics.git)
-      ```
-      https://github.com/devtodev-analytics/package_Analytics.git
-      ```
-    - [DevToDev Google](https://github.com/devtodev-analytics/package_Google.git)
-      ```
-      https://github.com/devtodev-analytics/package_Google.git
-      ```
+## 3. Fixing Facebook SDK Errors
+
+After importing the Facebook SDK, errors may occur.  
+To fix them:
+1. Delete the `Examples` folder inside the `Facebook` package.
+2. In Unity, navigate to: **PlayboxInstaller → Fix Facebook Error**.
 
 ---
 
-#### 📦 Facebook SDK
-- [Download Facebook SDK](https://lookaside.facebook.com/developers/resources/?id=FacebookSDK-current.zip)
-- **Note:** Adding Facebook SDK may cause conflicts with Unity UI components.  
-  To resolve:
-    1. Delete the **Facebook Samples** folder.
-    2. Use `Reimport All` in Unity.
+## 4. Finalize PlayboxSDK Installation
+
+1. After completing all the previous steps, go to:
+   **PlayboxInstaller → Install PlayboxSDK**.
+2. Wait for the process to complete — PlayboxSDK will be fully integrated into your project.
 
 ---
 
-#### 📦 Unity In-App Purchasing
-- [Unity Purchasing Documentation](https://docs.unity3d.com/Packages/com.unity.purchasing@4.12/manual/index.html)
+## Result
 
----
-
-#### 📦 Firebase
-- [Firebase Crashlytics & Firebase Analytics Download](https://firebase.google.com/download/unity)
-
----
-
-#### 📦 Google Mobile Ads(For consent on IOS,Android)
-- [google ads mobile](https://github.com/googleads/googleads-mobile-unity.git?path=packages/com.google.ads.mobile)
-
----
-
-#### 📦 IOS 14 Advertising support(ATT)
-- > Get from Unity Registry
-
----
-
----
-- And lastly just install the package via google upm :
-- > https://github.com/dreamsim-dev/PlayboxSdk.git#main
----
-
-## 📝 About PlayboxSDK
-
-**PlayboxSDK consists of the following components:**
-1. **CI/CD builder** for Unity.
-2. **Unified analytics** (integration of multiple analytics SDKs).
-3. **Unified ad management** (multiple ad providers in one abstraction).
-4. **Purchase validation** system.
-5. **Abstraction over SDKs for purchases**.
-6. **Custom log system** for streamlined logging and debugging.
-
----
+After following these steps:
+- PlayboxSDK is installed and ready to use.
+- Firebase (Analytics and Crashlytics) and Facebook SDKs are integrated.
+- Any Facebook SDK issues (if present) have been resolved.
