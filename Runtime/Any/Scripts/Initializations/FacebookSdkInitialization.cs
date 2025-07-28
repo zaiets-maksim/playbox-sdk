@@ -17,11 +17,11 @@ namespace Playbox
             if(!FacebookSdkConfiguration.Active)
                 return;
             
-            
             if (FB.IsInitialized)
             {
                 FB.ActivateApp();
                 FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
+                FB.Mobile.SetAutoLogAppEventsEnabled(true);
                 FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
             }
             else

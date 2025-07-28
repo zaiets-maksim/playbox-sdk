@@ -89,15 +89,13 @@ namespace Playbox
             
             behaviours.Add(AddToGameObject<PlayboxSplashUGUILogger>(gameObject, isDebugSplash));
             behaviours.Add(AddToGameObject<FirebaseInitialization>(gameObject));
-            behaviours.Add(AddToGameObject<DevToDevInitialization>(gameObject,true,true));
             
+            behaviours.Add(AddToGameObject<DevToDevInitialization>(gameObject,true,true));
             behaviours.Add(AddToGameObject<AppLovinInitialization>(gameObject,true,true));
             behaviours.Add(AddToGameObject<AppsFlyerInitialization>(gameObject,true,true));
             behaviours.Add(AddToGameObject<FacebookSdkInitialization>(gameObject,true,true));
-            
-            behaviours.Add(AddToGameObject<InAppVerification>(gameObject, useInAppValidation));
-            //behaviours.Add(AddToGameObject<InviteLinkGenerator>(gameObject, useLinkGenerator, true));
             behaviours.Add(AddToGameObject<IAP>(gameObject, usePlayboxIAP,true));
+            behaviours.Add(AddToGameObject<InAppVerification>(gameObject, useInAppValidation));
             
             InitStatus[nameof(PlayboxSplashUGUILogger)] = false;
             InitStatus[nameof(FirebaseInitialization)] = false;
@@ -116,10 +114,6 @@ namespace Playbox
                     item.GetInitStatus(() =>
                     {
                         item.playboxName.PlayboxInfo("INITIALIZED");
-                        
-                        //debugString += $"\n{item.playboxName}";
-                        //debugString.PlayboxSplashLogUGUI();
-                        
                         InitStatus[item.playboxName] = true;
                         
                     });

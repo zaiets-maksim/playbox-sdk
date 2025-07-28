@@ -7,7 +7,7 @@
 3. Click **Add package from Git URL...**.
 4. Paste the following URL:
    ```
-   https://github.com/playbox-technologies/playbox-installer.git
+   https://github.com/playbox-technologies/playbox-installer.git#main
    ```
 5. Click **Add** and wait for the installation to complete.
 
