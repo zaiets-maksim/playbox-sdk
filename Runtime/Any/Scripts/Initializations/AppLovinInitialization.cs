@@ -25,8 +25,6 @@ namespace Playbox
             
             MaxSdk.SetHasUserConsent(ConsentData.HasUserConsent);
             
-            //MaxSdk.SetDoNotSell(AppLovinConsent.hasDoNotSell);
-            
             MaxSdk.SetSdkKey(AppLovinConfiguration.AdvertisementSdk);
             MaxSdk.InitializeSdk();
 

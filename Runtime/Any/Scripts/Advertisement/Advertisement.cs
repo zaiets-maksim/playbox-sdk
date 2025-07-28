@@ -8,19 +8,15 @@ namespace Playbox
     /// <summary>
     /// <param name="Ready">
     /// The commercials are loaded.
-    /// Реклама загружена.
     /// </param>>
     /// <param name="NotReady">
     /// The ads are not loaded.
-    /// Реклама не загружена.
     /// </param>>
     /// <param name="NullStatus">
     /// The unitId of the advertisement is equal to Null.
-    /// UnitId рекламы равен Null.
     /// </param>>
     /// <param name="NotInitialized">
     /// MaxSdk is not initialized.
-    /// MaxSdk не проинициализирован.
     /// </param>>
     /// </summary>
       public enum AdReadyStatus
@@ -32,14 +28,12 @@ namespace Playbox
         }
     /// <summary>
     /// Responsible for advertising, is static. To use it, it must be initialized and AppLovinInitialization must be thrown into it.
-    /// Отвечает за рекламу, является статическим. Для использования его необходимо проинициализировать и прокинуть в него AppLovinInitialization.
     /// </summary>
     public static class Advertisement
     {
         private static string unitId;
         /// <summary>
         /// Returns the status of the advertisement's readiness for display.
-        /// Возвращает статус готовности рекламы к показу.
         /// </summary>
         public static bool isReady()
         {
@@ -48,64 +42,52 @@ namespace Playbox
         }
         /// <summary>
         /// Called when an advertisement is loaded.
-        /// Вызывается когда реклама загружена.
         /// </summary>
         public static event Action OnLoaded;
         /// <summary>
         /// Called when advertising is not loaded.
-        /// Вызывается когда реклама не загружена.
         /// </summary>
         public static event Action<string> OnLoadedFailed;
         /// <summary>
         /// Called when an advertisement has been closed by a player.
-        /// Вызывается когда реклама была закрыта игроком.
         /// </summary>
         public static event Action<string> OnPlayerClosedAd;
         /// <summary>
         /// Called when an ad was clicked.
-        /// Вызывается когда было произошло нажатие на рекламу.
         /// </summary>
         public static event Action<string> OnPlayerOnClicked;
         /// <summary>
         /// Called when an advertisement has not loaded.
-        /// Вызывается когда реклама не загрузилась.
         /// </summary>
         public static Action<string,string> OnAdLoadFailedEvent;
         /// <summary>
         /// Called when an advertisement has been viewed.
-        /// Вызывается когда реклама была просмотрена.
         /// <param name=""></param>>
         /// </summary>
         public static Action<string,string> OnAdReceivedRewardEvent;
         /// <summary>
         /// Called when an advertisement has been closed by the user.
-        /// Вызывается когда реклама была закрыта пользователем.
         /// </summary>
         public static Action<string,string> OnAdHiddenEvent;
         /// <summary>
         /// Called when an ad was clicked.
-        /// Вызывается когда было произошло нажатие на рекламу.
         /// </summary>
         public static Action<string> OnSdkInitializedEvent;
         
         /// <summary>
         /// Called when an advertisement is displayed.
-        /// Вызывается когда реклама отобразилась.
         /// </summary>
         public static Action OnDisplay;
         /// <summary>
         /// Called when the advertisement failed to display.
-        /// Вызывается когда реклама не смогла отобразится.
         /// </summary>
         public static Action OnFailedDisplay;
         /// <summary>
         /// Called when an advertisement has been closed by the user.
-        /// Вызывается когда реклама была закрыта пользователем.
         /// </summary>
         public static Action OnRewarderedClose;
         /// <summary>
         /// Called when an advertisement has been viewed.
-        /// Вызывается когда реклама была просмотрена.
         /// </summary>
         public static Action OnRewarderedReceived;
         public static Action<string> OnPlayerOpened;
@@ -114,14 +96,11 @@ namespace Playbox
         
         /// <summary>
         /// A method for initializing fields for ads, callbacks, and starting to load them.
-        /// Метод инициализации полей для рекламы, коллбеков и начала ее загрузки.
         /// <param name="unitId">
         /// Ad token from AppLovin(Unique for each platform).
-        /// Токен рекламы из AppLovin(Уникален для каждой платформы).
         /// </param>>
         /// <param name="aInitialization">
         /// AppLovin initialization script, required for basic services to work.
-        /// Скрипт инициализации AppLovin, необходим для работы основных сервисов.
         /// </param>>
         /// </summary>
         public static void RegisterReward(string unitId, AppLovinInitialization aInitialization)
@@ -147,10 +126,12 @@ namespace Playbox
         
         /// <summary>
         /// Loading ads.
-        /// Загрузка рекламы.
         /// </summary>
         public static void Load()
         {
+            if(isReady())
+                return;
+            
             if (MaxSdk.IsInitialized())
                 MaxSdk.LoadRewardedAd(UnitId);
         }
@@ -159,7 +140,6 @@ namespace Playbox
         /// Загрузка рекламы после определенного времени.
         /// <param name="delay">
         /// The time after which the advertisement will start loading.
-        /// Время после которого начнется загрузка рекламы.
         /// </param>>
         /// </summary>
         public static void Load(float delay)
@@ -171,25 +151,8 @@ namespace Playbox
         }
         /// <summary>
         /// Starts showing ads if they are ready to be shown, otherwise they will try to load again.
-        /// Запускает показ рекламы если она готова к показу, иначе она будет пытаться подгрузится снова.
         /// </summary>
         public static void Show()
-        {
-            if (isReady())
-            {
-                MaxSdk.ShowRewardedAd(unitId);    
-            }
-            else
-            {
-                Load();
-            }
-        }
-        /// <summary>
-        /// Starts showing ads if they are ready to be shown, otherwise they will try to load again.
-        /// Запускает показ рекламы если она готова к показу, иначе она будет пытаться подгрузится снова.
-        /// </summary>
-        [Obsolete("Obsolete, will be deleted in the future.Устарел, в дальнейшем будет удалено.")]
-        public static void ShowSelf()
         {
             if (isReady())
             {
@@ -203,7 +166,6 @@ namespace Playbox
 
         /// <summary>
         /// Returns the ready state of the advertisement.
-        /// Возвращает состояние готовности рекламы.
         /// <inheritdoc cref="AdReadyStatus"/>>
         /// </summary>
         public static AdReadyStatus IsReadyStatus()
@@ -234,8 +196,8 @@ namespace Playbox
             while (true)
             {
                 if(!isReady())
-                    Load();
-                yield return new WaitForSecondsRealtime(0.1f);
+                    Load(0.3f);
+                yield return new WaitForSecondsRealtime(0.5f);
             }
         }
 
@@ -314,7 +276,6 @@ namespace Playbox
         private static void OnRewardedAdLoadedEvent(string arg1, MaxSdkBase.AdInfo info)
         { 
             OnLoaded?.Invoke();
-//            Debug.Log("On Rewarded Ad Loaded");
         }
     }
 }
