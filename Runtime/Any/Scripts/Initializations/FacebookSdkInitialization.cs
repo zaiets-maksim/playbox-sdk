@@ -83,6 +83,35 @@ namespace Playbox
               
                 if (FB.IsInitialized) {
                     FB.ActivateApp();
+                    
+                    InitParameters();
+                } else {
+                    
+                    FB_Init( () => {
+
+                        if (!FB.IsInitialized)
+                        {
+                            FB_Error_Log();
+                            return;
+                        }
+
+                        FB.ActivateApp();
+                        InitParameters();
+                    });
+                }
+            }
+        }
+        
+        private void OnApplicationFocus(bool Focus)
+        {
+            Debug.Log($"Focus {Focus}");
+            
+            if (Focus) {
+              
+                if (FB.IsInitialized) {
+                    FB.ActivateApp();
+                    
+                    InitParameters();
                 } else {
                     
                     FB_Init( () => {
