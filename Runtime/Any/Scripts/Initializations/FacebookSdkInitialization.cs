@@ -10,13 +10,6 @@ namespace Playbox
     public class FacebookSdkInitialization : PlayboxBehaviour
     {
 
-        private void InitParameters()
-        {
-            FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
-            FB.Mobile.SetAutoLogAppEventsEnabled(true);
-            FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
-        }
-
         public override void Initialization()
         {
             base.Initialization();
@@ -51,10 +44,15 @@ namespace Playbox
             }
             else
             {
-                Analytics.Events.FirebaseEvent("Facebook", $"Firebase initialization failure\n App Id: {Application.identifier}");
+                FB_Error_Log();
             }
         }
-        
+
+        private static void FB_Error_Log()
+        {
+            Analytics.Events.FirebaseEvent("Facebook", $"Firebase initialization failure\n App Id: {Application.identifier}");
+        }
+
         private static void FB_Init(Action callback)
         {
             FB.Init(FacebookSdkConfiguration.AppID,
@@ -70,6 +68,13 @@ namespace Playbox
                 ()=> { callback?.Invoke(); });
         }
         
+        private void InitParameters()
+        {
+            FB.Mobile.SetAdvertiserIDCollectionEnabled(true);
+            FB.Mobile.SetAutoLogAppEventsEnabled(true);
+            FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
+        }
+        
         private void OnApplicationPause(bool pauseStatus)
         {
             Debug.Log($"Active {pauseStatus}");
@@ -81,8 +86,17 @@ namespace Playbox
                 } else {
                     
                     FB_Init( () => {
+
+                        if (!FB.IsInitialized)
+                        {
+                            FB_Error_Log();
+                            return;
+                        }
+
                         FB.ActivateApp();
                         InitParameters();
+                        
+                            
                     });
                 }
             }
