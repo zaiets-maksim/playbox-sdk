@@ -205,7 +205,7 @@ namespace Playbox
                 
                     case VerificationStatusHelper.EStatus.verified:
                     
-                        "Validation succeeded".PlayboxError();
+                        "Validation succeeded".PlayboxInfo();
                         purchaseDataItem.Value.OnValidateCallback?.Invoke(true);
                         removeFromQueueCallback?.Invoke(true);
                     
@@ -213,7 +213,7 @@ namespace Playbox
                 
                     case VerificationStatusHelper.EStatus.unverified:
                     
-                        "Validation failed".PlayboxError();
+                        "Validation failed".PlayboxInfo();
                         purchaseDataItem.Value.OnValidateCallback?.Invoke(false);
                         removeFromQueueCallback?.Invoke(true);
                         
