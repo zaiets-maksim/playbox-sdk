@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using Facebook.Unity;
+using Playbox;
 using Playbox.Consent;
 using Playbox.SdkConfigurations;
 using UnityEngine;
 
-namespace Playbox
+namespace Any.Scripts.Initializations
 {
     public class FacebookSdkInitialization : PlayboxBehaviour
     {
-        bool isPostInit = false;
+        private bool _isPostInit;
         
         private void Awake()
         {
@@ -18,11 +18,12 @@ namespace Playbox
 
         private void OnPostInit()
         {
-            isPostInit = true;
+            _isPostInit = true;
             
             MainInitialization.PostInitialization -= OnPostInit;
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public override void Initialization()
         {
             base.Initialization();
@@ -41,7 +42,7 @@ namespace Playbox
             }
             else
             {
-                FB_Init(() => { OnInitCallback();});
+                FB_Init(OnInitCallback);
             }
         }
 
@@ -90,7 +91,7 @@ namespace Playbox
         
         private void CheckActiveSDK()
         {
-            if (!isPostInit)
+            if (!_isPostInit)
                 return;
             
             if (FB.IsInitialized) {
