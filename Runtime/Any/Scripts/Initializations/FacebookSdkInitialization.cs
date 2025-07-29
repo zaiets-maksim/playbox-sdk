@@ -11,8 +11,6 @@ namespace Playbox
     {
         bool isPostInit = false;
         
-        pu
-        
         private void Awake()
         {
             MainInitialization.PostInitialization += OnPostInit;
