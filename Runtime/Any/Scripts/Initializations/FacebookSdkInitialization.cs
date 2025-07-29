@@ -9,6 +9,19 @@ namespace Playbox
 {
     public class FacebookSdkInitialization : PlayboxBehaviour
     {
+        bool isPostInit = false;
+        
+        private void Awake()
+        {
+            MainInitialization.PostInitialization += OnPostInit;
+        }
+
+        private void OnPostInit()
+        {
+            isPostInit = true;
+            
+            MainInitialization.PostInitialization -= OnPostInit;
+        }
 
         public override void Initialization()
         {
@@ -77,6 +90,9 @@ namespace Playbox
         
         private void OnApplicationPause(bool pauseStatus)
         {
+            if (!isPostInit)
+                return;
+            
             Debug.Log($"Active {pauseStatus}");
             
             if (!pauseStatus) {
@@ -84,7 +100,6 @@ namespace Playbox
                 if (FB.IsInitialized) {
                     FB.ActivateApp();
                     
-                    InitParameters();
                 } else {
                     
                     FB_Init( () => {
@@ -96,40 +111,9 @@ namespace Playbox
                         }
 
                         FB.ActivateApp();
-                        InitParameters();
                     });
                 }
             }
         }
-        
-        private void OnApplicationFocus(bool Focus)
-        {
-            Debug.Log($"Focus {Focus}");
-            
-            if (Focus) {
-              
-                if (FB.IsInitialized) {
-                    FB.ActivateApp();
-                    
-                    InitParameters();
-                } else {
-                    
-                    FB_Init( () => {
-
-                        if (!FB.IsInitialized)
-                        {
-                            FB_Error_Log();
-                            return;
-                        }
-
-                        FB.ActivateApp();
-                        InitParameters();
-                        
-                            
-                    });
-                }
-            }
-        }
-
     }
 }
