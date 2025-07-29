@@ -11,6 +11,8 @@ namespace Playbox
     {
         bool isPostInit = false;
         
+        pu
+        
         private void Awake()
         {
             MainInitialization.PostInitialization += OnPostInit;
@@ -88,32 +90,30 @@ namespace Playbox
             FB.Mobile.SetAdvertiserTrackingEnabled(ConsentData.ATE);
         }
         
-        private void OnApplicationPause(bool pauseStatus)
+        private void CheckActiveSDK()
         {
             if (!isPostInit)
                 return;
             
-            Debug.Log($"Active {pauseStatus}");
-            
-            if (!pauseStatus) {
-              
-                if (FB.IsInitialized) {
+            if (FB.IsInitialized) {
                     FB.ActivateApp();
                     
-                } else {
-                    
-                    FB_Init( () => {
+            } else {
+                FB_Init( () => {
 
-                        if (!FB.IsInitialized)
-                        {
-                            FB_Error_Log();
-                            return;
-                        }
+                    if (!FB.IsInitialized)
+                    { 
+                        FB_Error_Log();
+                        return;
+                    }
 
-                        FB.ActivateApp();
-                    });
-                }
+                    FB.ActivateApp();
+                });
             }
+            
         }
+        
+        private void OnApplicationPause(bool pause) { CheckActiveSDK(); }
+        private void OnApplicationFocus(bool focus) { CheckActiveSDK(); }
     }
 }
