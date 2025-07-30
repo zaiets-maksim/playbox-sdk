@@ -21,20 +21,10 @@
 4. From this folder, extract and install the required SDKs:
   - `Firebase.Analytics`
   - `Firebase.Crashlytics`
-  - `FacebookSdk`
 
 ---
 
-## 3. Fixing Facebook SDK Errors
-
-After importing the Facebook SDK, errors may occur.  
-To fix them:
-1. Delete the `Examples` folder inside the `Facebook` package.
-2. In Unity, navigate to: **PlayboxInstaller → Fix Facebook Error**.
-
----
-
-## 4. Finalize PlayboxSDK Installation
+## 3. Finalize PlayboxSDK Installation
 
 1. After completing all the previous steps, go to:
    **PlayboxInstaller → Install PlayboxSDK**.
@@ -46,5 +36,3 @@ To fix them:
 
 After following these steps:
 - PlayboxSDK is installed and ready to use.
-- Firebase (Analytics and Crashlytics) and Facebook SDKs are integrated.
-- Any Facebook SDK issues (if present) have been resolved.
