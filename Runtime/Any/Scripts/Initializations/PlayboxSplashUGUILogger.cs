@@ -13,7 +13,7 @@ namespace Playbox
         private string text = "";
         
         [SerializeField]
-        private GUIStyle style = new GUIStyle();
+        private GUIStyle style = new ();
         private Texture2D texture;
 
         private float splashTime = 8;
