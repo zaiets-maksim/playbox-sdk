@@ -24,7 +24,7 @@ namespace Playbox.CI
             PlayerSettings.iOS.buildNumber = SmartCLA.Arguments.BuildNumber.ToString();
             PlayerSettings.bundleVersion = SmartCLA.Arguments.BuildVersion;
             
-            EditorUserBuildSettings.development = false;
+            EditorUserBuildSettings.development = SmartCLA.Validations.HasDevelopmentMode || SmartCLA.Validations.HasDebugMode;
             EditorUserBuildSettings.allowDebugging = false;
 
             PlayerSettings.iOS.appleDeveloperTeamID = SmartCLA.Arguments.TeamID ?? TeamID;

@@ -41,6 +41,8 @@
         {
             /// <summary>Returns true if development mode argument is present.</summary>
             public static bool HasDevelopmentMode => SmartEnviroment.HasArgument(Constants.DEVELOPMENT_MODE);
+            /// <summary>Returns true if development mode argument is present.</summary>
+            public static bool HasDebugMode => SmartEnviroment.HasArgument(Constants.DEBUG_MODE);
             /// <summary>Returns true if build location argument is present.</summary>
             public static bool HasBuildLocation => SmartEnviroment.HasArgument(Constants.BUILD_LOCATION);
             /// <summary>Returns true if splash screen argument is present.</summary>
@@ -78,7 +80,8 @@
         /// </summary>
         public static class Constants
         {
-            public const string DEVELOPMENT_MODE = "-debug"; // Enable debug mode
+            public const string DEVELOPMENT_MODE = "-dev"; // Enable development mode
+            public const string DEBUG_MODE = "-debug"; // Enable debug mode
             public const string BUILD_LOCATION = "-build-location"; // Build output location
             public const string SPLASH_SCREEN = "-splash-screen"; // Show splash screen
             public const string BUILD_VERSION = "-build-version"; // App version (e.g., "0.0.1")
