@@ -33,7 +33,7 @@ namespace Playbox.CI
             PlayerSettings.SplashScreen.showUnityLogo = false;
             EditorUserBuildSettings.buildAppBundle = SmartCLA.Validations.HasStoreBuild;
             
-            SetDebuggableFlag(debug);
+            SetDebuggableFlag(EditorUserBuildSettings.development);
             
             if(SmartCLA.Validations.HasBuildVersion) PlayerSettings.bundleVersion = SmartCLA.Arguments.BuildVersion;
             if(SmartCLA.Validations.HasKeystorePass) PlayerSettings.Android.keystorePass = SmartCLA.Arguments.KeystorePass;
