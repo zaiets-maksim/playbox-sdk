@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using CI.Utils.Extentions;
 
 #if UNITY_EDITOR && UNITY_ANDROID
@@ -20,7 +20,7 @@ namespace Playbox.CI
 
             EditorUserBuildSettings.development = SmartCLA.Validations.HasDevelopmentMode || SmartCLA.Validations.HasDebugMode;
 
-            if (debug)
+            if (EditorUserBuildSettings.development)
             {
                 EditorUserBuildSettings.androidBuildType = AndroidBuildType.Debug;
             }
