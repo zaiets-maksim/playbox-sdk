@@ -23,6 +23,7 @@ namespace Playbox
 {
     public class MainInitialization : PlayboxBehaviour
     {
+        [SerializeField] private bool isAutoInitialize = true;
         [SerializeField] private bool useInAppValidation = true;
         [SerializeField] private bool useLinkGenerator = true;
         [SerializeField] private bool isDebugSplash = false;
@@ -57,6 +58,9 @@ namespace Playbox
 
         private void Start()
         {
+            if (!isAutoInitialize)
+                return;
+            
             try
             {
                 Initialization();
@@ -69,6 +73,7 @@ namespace Playbox
                 }
             }
         }
+        
 
         public static bool IsValidate<T>() where T : PlayboxBehaviour
         {
