@@ -18,7 +18,7 @@
 1. In Unity, open the **PlayboxInstaller context menu**.
 2. Run all setup stages sequentially (Stage 1 → Stage 2).
 3. After **Stage 2** is complete, a `DownloadFiles` folder will appear in the project root.
-4. From this folder, extract and install the required SDKs:
+4. From this folder, extract and install(Assets → Import Package → Custom package...)the required SDKs:
   - `Firebase.Analytics`
   - `Firebase.Crashlytics`
 
