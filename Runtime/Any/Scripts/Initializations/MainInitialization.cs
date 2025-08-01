@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Any.Scripts.Initializations;
 using AppsFlyerSDK;
 using CI.Utils.Extentions;
-using Firebase.Crashlytics;
 using Playbox.Consent;
 #if UNITY_EDITOR
 #endif
@@ -69,7 +68,7 @@ namespace Playbox
             {
                 if (IsValidate<FirebaseInitialization> ())
                 {
-                    Crashlytics.LogException(e);
+                    
                 }
             }
         }
