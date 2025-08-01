@@ -106,7 +106,7 @@ namespace Playbox
         
         public static void LogPurchase(Product purchasedProduct, Action<bool> onValidate  = null)
         {
-            Debug.Log($"[1aa10dc3] LogPurchase start product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID}");
+            Debug.Log($"[1aa10dc3] LogPurchase start product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID} price: {purchasedProduct.metadata.localizedPrice} isoCC: {purchasedProduct.metadata.isoCurrencyCode}");
             if(purchasedProduct == null)
             {
                 if(isFirebaseInit)
