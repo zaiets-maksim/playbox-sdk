@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using Firebase;
-using Firebase.Crashlytics;
 using Firebase.Extensions;
 using UnityEngine;
 
@@ -35,9 +34,6 @@ namespace Playbox
 
         private void Init()
         {
-            Crashlytics.ReportUncaughtExceptionsAsFatal = true; 
-            Crashlytics.IsCrashlyticsCollectionEnabled = true;
-            
             ApproveInitialization();
             
         }
