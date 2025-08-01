@@ -129,7 +129,7 @@ namespace Playbox
             
             InAppVerification.Validate(purchasedProduct.definition.id,purchasedProduct.receipt,"000", (isValid) =>
             {
-                Debug.Log($"[1aa10dc3] LogPurchase->RealCurrencyPayment product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID}");
+                Debug.Log($"[1aa10dc3] LogPurchase->RealCurrencyPayment product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID} isValid: {isValid}");
                 onValidate?.Invoke(isValid);
                 
                 if (isValid)
