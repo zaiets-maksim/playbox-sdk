@@ -6,7 +6,6 @@ using Any.Scripts.Initializations;
 using AppsFlyerSDK;
 using CI.Utils.Extentions;
 using DevToDev.Analytics;
-using Firebase.Analytics;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -31,7 +30,6 @@ namespace Playbox
         public static bool isAppLovinInit => IsValidate<AppLovinInitialization>();
         public static bool isDTDInit => IsValidate<DevToDevInitialization>();
         public static bool isFSBInit => IsValidate<FacebookSdkInitialization>();
-        public static bool isFirebaseInit => IsValidate<FirebaseInitialization>();
         
         private static bool IsValidate<T>() where T : PlayboxBehaviour
         {
@@ -77,9 +75,6 @@ namespace Playbox
 
         public static void TrackEvent(string eventName)
         {
-            if (isFirebaseInit)
-                FirebaseAnalytics.LogEvent(eventName);
-            
             if (isDTDInit)
                 DTDAnalytics.CustomEvent(eventName);
         }
@@ -323,18 +318,12 @@ namespace Playbox
             /// </summary>
             public static void CrashlyticsLog(string eventName, string message)
             {
-                if (isFirebaseInit)
-                {
-                    
-                }
+
             }
             
             public static void FirebaseEvent(string eventName, string message)
             {
-                if (isFirebaseInit)
-                {
-                    FirebaseAnalytics.LogEvent($"{eventName} : {message}");
-                }
+
             }
         }
     }
