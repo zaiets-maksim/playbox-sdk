@@ -61,6 +61,9 @@ namespace Playbox
         public IEnumerator Request(string productID,string receipt, string saveId, Action<bool> callback)
         {
             UnityWebRequest sendPurchaseRequest = new UnityWebRequest(uri, "POST");
+            
+            sendPurchaseRequest.SetRequestHeader("Content-Type", "application/json");
+            sendPurchaseRequest.SetRequestHeader("x-api-token", xApiToken);
         
             var sendObject = CreateSendObjectJson(productID, receipt, sendPurchaseRequest);
 
@@ -101,9 +104,6 @@ namespace Playbox
 
         private JObject CreateSendObjectJson(string productID, string receipt, UnityWebRequest unityWebRequest)
         {
-            unityWebRequest.SetRequestHeader("Content-Type", "application/json");
-            unityWebRequest.SetRequestHeader("x-api-token", xApiToken);
-        
             TimeZoneInfo localZone = TimeZoneInfo.Local;
             
             JObject sendObject = new();
@@ -111,7 +111,6 @@ namespace Playbox
             sendObject["os_version"] = SystemInfo.operatingSystem;
             sendObject["device_name"] = SystemInfo.deviceName;
             sendObject["device_model"] = SystemInfo.deviceModel;
-            sendObject["manufacturer"] = GetManufacturer();
             sendObject["device_locale"] = CultureInfo.CurrentCulture.Name;
             sendObject["time_zone"] = localZone.DisplayName;
             sendObject["app_version"] = Data.Playbox.AppVersion;
@@ -124,6 +123,12 @@ namespace Playbox
             sendObject["platform"] = "android";
 #elif UNITY_IOS
             sendObject["platform"] = "ios";
+#endif
+            
+#if UNITY_ANDROID
+            sendObject["manufacturer"] = "android";
+#elif UNITY_IOS
+            sendObject["manufacturer"] = "apple";
 #endif
             
             return sendObject;
@@ -204,16 +209,14 @@ namespace Playbox
                         break;
                 
                     case VerificationStatusHelper.EStatus.verified:
-                    
-                        "Validation succeeded".PlayboxInfo();
+                        
                         purchaseDataItem.Value.OnValidateCallback?.Invoke(true);
                         removeFromQueueCallback?.Invoke(true);
                     
                         break;
                 
                     case VerificationStatusHelper.EStatus.unverified:
-                    
-                        "Validation failed".PlayboxInfo();
+                        
                         purchaseDataItem.Value.OnValidateCallback?.Invoke(false);
                         removeFromQueueCallback?.Invoke(true);
                         
@@ -230,25 +233,9 @@ namespace Playbox
                         break;
                 }
             
+                purchaseDataItem.Value.OnValidateCallback?.Invoke(false);
+                removeFromQueueCallback?.Invoke(true);
             }
-        }
-
-        private string GetManufacturer()
-        {
-            
-#if UNITY_IOS
-            return "Apple";
-#endif
-
-#if UNITY_ANDROID
-            
-            using (var buildClass = new AndroidJavaClass("android.os.Build"))
-            {
-                return buildClass.GetStatic<string>("MANUFACTURER");
-            }
-#endif
-
-            return "Editor";
         }
     }
 }

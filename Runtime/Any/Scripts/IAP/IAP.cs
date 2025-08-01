@@ -102,6 +102,7 @@ namespace Playbox
             {
                 $"The purchase is complete: {product.definition.id}".PlayboxInfo("IAP");    
                 
+                /*
                 Analytics.LogPurchase(product, (b) =>
                 {
                     if (b)
@@ -113,6 +114,7 @@ namespace Playbox
                         $"Unvalidate Purchase {product.definition.id}".PlayboxInfo("IAP");
                     }
                 });
+                */
                 
                 GrantProduct(product);
             }
