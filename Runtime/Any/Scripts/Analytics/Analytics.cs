@@ -106,7 +106,6 @@ namespace Playbox
         
         public static void LogPurchase(Product purchasedProduct, Action<bool> onValidate  = null)
         {
-            Debug.Log($"[1aa10dc3] LogPurchase start product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID}");
             if(purchasedProduct == null)
             {
                 if(isFirebaseInit)
@@ -129,7 +128,6 @@ namespace Playbox
             
             InAppVerification.Validate(purchasedProduct.definition.id,purchasedProduct.receipt,"000", (isValid) =>
             {
-                Debug.Log($"[1aa10dc3] LogPurchase->RealCurrencyPayment product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID}");
                 onValidate?.Invoke(isValid);
                 
                 if (isValid)
