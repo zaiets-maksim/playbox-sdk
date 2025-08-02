@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
+using Firebase;
+using Firebase.Extensions;
 using UnityEngine;
 
 namespace Playbox
@@ -16,12 +18,24 @@ namespace Playbox
 
         public void InitializeCrashlytics()
         {
-            
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
+                var dependencyStatus = task.Result;
+                if (dependencyStatus == DependencyStatus.Available)
+                {
+                    Init();
+                }
+                else
+                {
+                    Debug.LogError($"Could not resolve Firebase dependencies: {dependencyStatus}");
+                }
+            });
         }
 
         private void Init()
         {
             ApproveInitialization();
+            
         }
     }
 }
