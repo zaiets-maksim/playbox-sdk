@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -7,6 +7,7 @@ using AppsFlyerSDK;
 using CI.Utils.Extentions;
 using DevToDev.Analytics;
 using Firebase.Analytics;
+using Firebase.Crashlytics;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -108,6 +109,8 @@ namespace Playbox
             Debug.Log($"[1aa10dc3] LogPurchase start product id: {purchasedProduct.definition.id} tx id: {purchasedProduct.transactionID} price: {purchasedProduct.metadata.localizedPrice} isoCC: {purchasedProduct.metadata.isoCurrencyCode}");
             if(purchasedProduct == null)
             {
+                if(isFirebaseInit)
+                    Crashlytics.LogException(new Exception("[PlayboxLogging] purchasedProduct is null"));
                 return;
             }
 
@@ -141,6 +144,10 @@ namespace Playbox
         {
             if (args != null)
             {
+                if(isFirebaseInit)
+                    Crashlytics.LogException(new Exception("[PlayboxLogging] purchase Args is null"));
+                    
+                    
                 LogPurchase(args.purchasedProduct, onValidate);
             }
         }
@@ -325,7 +332,7 @@ namespace Playbox
             {
                 if (isFirebaseInit)
                 {
-                    
+                    Crashlytics.Log($"{eventName} : {message}");
                 }
             }
             
